@@ -17,5 +17,32 @@ public class OOPSBannerApp {
         System.out.println("*       *" + "   " + "*       *" + "   " + "*        " + "   " + "        *");
         System.out.println("*********" + "   " + "*********" + "   " + "*        " + "   " + "*********");
 
+
+        System.out.println();
+
+        //OOPSBannerApp UC3-OOPS Banner Display (used String.join())
+        System.out.println(String.join("   ",
+                "*********", "*********", "*********", "*********"));
+
+        System.out.println(String.join("   ",
+                "*       *", "*       *", "*       *", "*        "));
+
+        System.out.println(String.join("   ",
+                "*       *", "*       *", "*       *", "*        "));
+
+        System.out.println(String.join("   ",
+                "*       *", "*       *", "*********", "*********"));
+
+        System.out.println(String.join("   ",
+                "*       *", "*       *", "*        ", "        *"));
+
+        System.out.println(String.join("   ",
+                "*       *", "*       *", "*        ", "        *"));
+
+        System.out.println(String.join("   ",
+                "*********", "*********", "*        ", "*********"));
     }
+
+
 }
+
