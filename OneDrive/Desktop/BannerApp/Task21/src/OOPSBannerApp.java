@@ -74,7 +74,27 @@ public class OOPSBannerApp {
         System.out.println(line);
 
     }
+
+
+        System.out.println();
+
+        //OOPSBannerApp UC5- Prints OOPS banner using inline array and loop.
+        String[] banner2 = {
+                String.join("   ", "*********", "*********", "*********", "*********"),
+                String.join("   ", "*       *", "*       *", "*       *", "*        "),
+                String.join("   ", "*       *", "*       *", "*       *", "*        "),
+                String.join("   ", "*       *", "*       *", "*********", "*********"),
+                String.join("   ", "*       *", "*       *", "*        ", "        *"),
+                String.join("   ", "*       *", "*       *", "*        ", "        *"),
+                String.join("   ", "*********", "*********", "*        ", "*********")
+        };
+
+        // Print banner using for-each loop
+        for (String line : banner2) {
+            System.out.println(line);
+        }
     }
+
 }
 
 
