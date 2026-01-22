@@ -2,7 +2,7 @@
  * OOPSBannerApp UC1-OOPS Banner Display Application
  *
  */
-
+import java.util.HashMap;
 public class OOPSBannerApp {
     //public static void main(String args[]) {
         /*
@@ -194,6 +194,7 @@ public class OOPSBannerApp {
 
 
 //OOPSBannerApp UC7- Store Character Pattern in a Class
+    /*
 static class  CharacterPatternMap{
         private char characters;
         private String[] patterns;
@@ -265,7 +266,79 @@ static class  CharacterPatternMap{
         }
 
         System.out.println(line.toString());
+    }*/
+
+
+
+
+    //OOPSBannerApp UC8- Use Map for Character Patterns and Render via Function
+
+    static HashMap<Character, String[]> patternMap = new HashMap<>();
+    public static void buildPatterns() {
+        String[] oPattern = {
+                "    ***    ",
+                " **     ** ",
+                "**       **",
+                "**       **",
+                "**       **",
+                " **     ** ",
+                "    ***    "
+
+        };
+
+        String[] pPattern = {
+                "*********",
+                "*       *",
+                "*       *",
+                "*********",
+                "*        ",
+                "*        ",
+                "*        "
+
+        };
+
+
+        String[] sPattern = {
+                "*********",
+                "*        ",
+                "*        ",
+                "*********",
+                "        *",
+                "        *",
+                "*********"
+        };
+
+
+        patternMap.put('O', oPattern);
+        patternMap.put('P', pPattern);
+        patternMap.put('S', sPattern);
     }
+
+
+    public static void printBanner(String message) {
+
+        for (int row = 0; row < 7; row++) {
+
+            StringBuilder line = new StringBuilder();
+
+            for (int i = 0; i < message.length(); i++) {
+                char ch = message.charAt(i);
+                String[] pattern = patternMap.get(ch);
+                line.append(pattern[row]).append("   ");
+            }
+
+            System.out.println(line);
+        }
+    }
+
+    public static void main(String[] args) {
+        buildPatterns();
+        printBanner("OOPS");
+
+
+
+
+
 
     }
 
