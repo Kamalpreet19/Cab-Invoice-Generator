@@ -338,8 +338,6 @@ static class  CharacterPatternMap{
 
 
 
-
-
     }
 
 }
