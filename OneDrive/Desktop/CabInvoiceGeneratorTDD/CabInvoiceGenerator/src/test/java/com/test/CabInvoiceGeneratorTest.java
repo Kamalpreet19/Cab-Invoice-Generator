@@ -1,36 +1,41 @@
 package com.test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
 
 public class CabInvoiceGeneratorTest {
 
     @Test
-    public void givenDistanceAndTime_ShouldReturnTotalFare() {
+    public void givenNormalRide_ShouldReturnFare() {
         CabInvoiceGenerator generator = new CabInvoiceGenerator();
-        double fare = generator.calculateFare(2.0, 5);
+        Ride ride = new Ride(2.0, 5, RideType.NORMAL);
+
+        double fare = generator.calculateFare(ride);
         assertEquals(fare, 25.0);
     }
 
     @Test
-    public void givenSmallRide_ShouldReturnMinimumFare() {
+    public void givenPremiumRide_ShouldReturnPremiumFare() {
         CabInvoiceGenerator generator = new CabInvoiceGenerator();
-        double fare = generator.calculateFare(0.0, 2);
-        assertEquals(fare, 5.0);
+        Ride ride = new Ride(2.0, 5, RideType.PREMIUM);
+
+        double fare = generator.calculateFare(ride);
+        assertEquals(fare, 40.0);
     }
 
     @Test
     public void givenMultipleRides_ShouldReturnAggregateFare() {
         CabInvoiceGenerator generator = new CabInvoiceGenerator();
+
         Ride[] rides = {
-                new Ride(2.0, 5),
-                new Ride(0, 2)
+                new Ride(2.0, 5, RideType.NORMAL),   // 25
+                new Ride(1.0, 1, RideType.PREMIUM)  // min 20
         };
 
         InvoiceSummary summary = generator.calculateFare(rides);
-        InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0);
+        InvoiceSummary expected = new InvoiceSummary(2, 45.0);
 
-        assertEquals(summary, expectedSummary);
+        assertEquals(summary, expected);
     }
 
     @Test
@@ -38,16 +43,16 @@ public class CabInvoiceGeneratorTest {
         RideRepository repository = new RideRepository();
 
         Ride[] rides = {
-                new Ride(2.0, 5),
-                new Ride(0, 2)
+                new Ride(2.0, 5, RideType.NORMAL),
+                new Ride(1.0, 1, RideType.PREMIUM)
         };
 
         repository.addRides("user1", rides);
 
-        InvoiceService invoiceService = new InvoiceService(repository);
-        InvoiceSummary summary = invoiceService.getInvoiceSummary("user1");
+        InvoiceService service = new InvoiceService(repository);
+        InvoiceSummary summary = service.getInvoiceSummary("user1");
 
-        InvoiceSummary expected = new InvoiceSummary(2, 30.0);
+        InvoiceSummary expected = new InvoiceSummary(2, 45.0);
         assertEquals(summary, expected);
     }
 }
